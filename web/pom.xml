@@ -19,39 +19,47 @@ under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>4.0.0</modelVersion>
-   <groupId>de.csmp.jee-template01</groupId>
- 	<artifactId>web</artifactId>
-  <packaging>war</packaging>
+   <groupId>${project.parent.groupId}</groupId>
+ 	 <artifactId>web</artifactId>
+   <packaging>war</packaging>
 
    <name>Web Project</name>
+
    <parent>
      <groupId>de.csmp.jee-template01</groupId>
      <artifactId>parent</artifactId>
      <version>1.0-SNAPSHOT</version>
-
    </parent>
-   
-   <dependencies>
-   <!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
-<dependency>
-    <groupId>org.primefaces</groupId>
-    <artifactId>primefaces</artifactId>
-    <version>${primefaces.version}</version>
-</dependency>
 
-<dependency>
-	<groupId>javax</groupId>
-	<artifactId>javaee-api</artifactId>
-</dependency>
-   
-   <dependency>
+   <dependencies>
+     <dependency>
+        <groupId>org.primefaces</groupId>
+        <artifactId>primefaces</artifactId>
+        <version>${primefaces.version}</version>
+      </dependency>
+
+      <dependency>
+      	<groupId>javax</groupId>
+      	<artifactId>javaee-api</artifactId>
+      </dependency>
+
+     <dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-core</artifactId>
 			</dependency>
+
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-jcl</artifactId>
 			</dependency>
    </dependencies>
 
+   <repositories>
+       <repository>
+           <id>prime-repo</id>
+           <name>PrimeFaces Maven Repository</name>
+           <url>http://repository.primefaces.org</url>
+           <layout>default</layout>
+       </repository>
+   </repositories>
 </project>
