@@ -26,8 +26,8 @@ under the License.
    <name>Common Codebase/config Project</name>
 
    <parent>
-     <groupId>de.csmp.jee-template</groupId>
-     <artifactId>parent</artifactId>
+     <groupId>de.csmp</groupId>
+     <artifactId>jee-template</artifactId>
      <version>1.0-SNAPSHOT</version>
    </parent>
 </project>

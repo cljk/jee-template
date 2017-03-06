@@ -18,117 +18,116 @@ specific language governing permissions and limitations
 under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.csmp.jee-template</groupId>
-	<artifactId>parent</artifactId>
-	<version>1.0-SNAPSHOT</version>
+  <modelVersion>4.0.0</modelVersion>
 
-	<packaging>pom</packaging>
+  <groupId>de.csmp</groupId>
+  <artifactId>jee-template</artifactId>
+  <version>1.0-SNAPSHOT</version>
 
-	<name>jee-template 01 Root Project</name>
+  <packaging>pom</packaging>
+  <name>${project.artifactId} parent project</name>
 
-	<modules>
-		<module>common</module>
-		<module>ejbs</module>
-		<module>web</module>
+  <modules>
+    <module>common</module>
+    <module>ejbs</module>
+    <module>web</module>
+    <module>ear</module>
+  </modules>
+  <properties>
+    <java.version>1.8</java.version>
 
-		<module>ear</module>
-	</modules>
+    <debug>true</debug>
 
-<properties>
-	<java.version>1.8</java.version>
-	<primefaces.version>6.0</primefaces.version>
-</properties>
+    <prettyfaces.version>3.1.0</prettyfaces.version>
+    <primefaces.version>6.0</primefaces.version><!-- http://mvnrepository.com/artifact/org.primefaces/primefaces -->
+    <jsf.version>2.2.11</jsf.version><!-- http://mvnrepository.com/artifact/com.sun.faces/jsf-impl/2.2.11 -->
+    <arquillian.version>1.1.8.Final</arquillian.version>
+    <log4j.version>2.3</log4j.version>
+    <junit.version>4.12</junit.version>
+  </properties>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+            <debug>${debug}</debug>
+            <showDeprecation>${debug}</showDeprecation>
+					  <showWarnings>${debug}</showWarnings>
+          </configuration>
+        </plugin>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-	        <plugin>
-	          <groupId>org.apache.maven.plugins</groupId>
-	          <artifactId>maven-compiler-plugin</artifactId>
-	          <configuration>
-	            <source>${java.version}</source>
-	            <target>${java.version}</target>
-	          </configuration>
-	        </plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-eclipse-plugin</artifactId>
-					<configuration>
-						<projectNameTemplate>
-							jee-template-[artifactId]
-						</projectNameTemplate>
-						<wtpmanifest>true</wtpmanifest>
-						<wtpapplicationxml>true</wtpapplicationxml>
-						<wtpversion>2.0</wtpversion>
-						<manifest>
-							${basedir}/src/main/resources/META-INF/MANIFEST.MF
-						</manifest>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-eclipse-plugin</artifactId>
+          <configuration>
+            <projectNameTemplate>jee-template-[artifactId]</projectNameTemplate>
+            <wtpmanifest>true</wtpmanifest>
+            <wtpapplicationxml>true</wtpapplicationxml>
+            <wtpversion>2.0</wtpversion>
+            <manifest>${basedir}/src/main/resources/META-INF/MANIFEST.MF</manifest>
+            <downloadSources>true</downloadSources>
+            <downloadJavadocs>true</downloadJavadocs>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>de.csmp.jee-template</groupId>
+        <artifactId>common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>de.csmp.jee-template</groupId>
+        <artifactId>web</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>de.csmp.jee-template</groupId>
+        <artifactId>ejbs</artifactId>
+        <version>${project.version}</version>
+        <type>ejb</type>
+      </dependency>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+      <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-api</artifactId>
+        <version>7.0</version>
+        <scope>provided</scope>
+      </dependency>
 
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>web</artifactId>
-				<version>${project.version}</version>
-				<type>war</type>
-			</dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-jcl</artifactId>
+        <version>2.3</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>ejbs</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-
-
-		<dependency>
-					<groupId>javax</groupId>
-					<artifactId>javaee-api</artifactId>
-					<version>7.0</version>
-					<scope>provided</scope>
-				</dependency>
-
-				<dependency>
-					<groupId>org.apache.logging.log4j</groupId>
-					<artifactId>log4j-core</artifactId>
-					<version>2.3</version>
-				</dependency>
-				<dependency>
-					<groupId>org.apache.logging.log4j</groupId>
-					<artifactId>log4j-jcl</artifactId>
-					<version>2.3</version>
-				</dependency>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-</dependencyManagement>
-<dependencies>
-	<dependency>
-				<groupId>org.apache.logging.log4j</groupId>
-				<artifactId>log4j-api</artifactId>
-				<version>2.3</version>
-			</dependency>
-
-
-
-
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.12</version>
-		<scope>test</scope>
-	</dependency>
-</dependencies>
-
 </project>
