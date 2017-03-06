@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<Property name="log-path">logs</Property>
+	</Properties>
+
+	<Appenders>
+		<RollingFile name="FILE" 
+			fileName="${log-path}/jee-template.log"
+			filePattern="${log-path}/jee-template-%d{yyyy-MM-dd}.log" 
+			append="true"
+			>
+
+			<PatternLayout pattern="[%d{HH:mm:ss} %5p] (%F:%L)\t\: %m%n" />
+
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+
+		</RollingFile>
+		
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%p,%C{1}] %m%n" />
+		</Console> 
+	</Appenders>
+
+	<Loggers>
+		<Logger name="de.csmp" level="debug" />
+		
+		
+		<Root level="info" additivity="false">
+			<AppenderRef ref="STDOUT" />
+			<AppenderRef ref="FILE" />
+		</Root>
+	</Loggers>
+</Configuration>
