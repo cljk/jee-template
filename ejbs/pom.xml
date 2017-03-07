@@ -40,12 +40,16 @@ under the License.
 				<version>2.5.1</version>
 				<configuration>
 					<ejbVersion>3.0</ejbVersion>
+					<generateClient>true</generateClient>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
-
+		<dependency>
+			<groupId>de.csmp.jee-template</groupId>
+			<artifactId>common</artifactId>
+		</dependency>
 	</dependencies>
 </project>

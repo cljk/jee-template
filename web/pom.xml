@@ -55,6 +55,13 @@ under the License.
 		<dependency>
 			<groupId>de.csmp.jee-template</groupId>
 			<artifactId>common</artifactId>
+			<!-- <scope>provided</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>de.csmp.jee-template</groupId>
+			<artifactId>ejbs</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
 		</dependency>
 	
 		<dependency>
