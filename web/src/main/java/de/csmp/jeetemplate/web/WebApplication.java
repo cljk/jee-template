@@ -2,6 +2,7 @@ package de.csmp.jeetemplate.web;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
@@ -10,10 +11,14 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 
+import org.apache.commons.configuration2.CompositeConfiguration;
 import org.apache.commons.lang3.StringUtils;
+
+import de.csmp.jeetemplate.web.configuration.ConfigurationUtil;
 
 @ApplicationScoped
 public class WebApplication implements Serializable {
@@ -26,6 +31,11 @@ public class WebApplication implements Serializable {
 	private ServletContext context;
 	
 	private Date startupDate = null;
+	private String runHash = "notInitialized";
+	
+	@Produces
+	CompositeConfiguration configuration = null;
+	
 	
 	
 	public void init(@Observes @Initialized(ApplicationScoped.class) Object init) {
@@ -39,16 +49,21 @@ public class WebApplication implements Serializable {
 	@PostConstruct
 	public void postConstruct() {
 		startupDate = new Date();
+		runHash = UUID.randomUUID().toString().substring(0, 8);
+		
 		
 		log.info(StringUtils.repeat("=", 80));
 		log.info("startup at " + startupDate);
 		log.info("");
-		log.info(StringUtils.repeat(" ", 60) + "application at: " + context.getContextPath());
+		log.info(StringUtils.repeat(" ", 40) + "application at: " + context.getContextPath());
+		log.info(StringUtils.repeat(" ", 40) + "runHash:        " + runHash);
 		log.info("");
 		log.info(StringUtils.repeat("=", 80));
 		
 		// init log4j
 		org.apache.logging.log4j.spi.LoggerContext lctx = org.apache.logging.log4j.LogManager.getContext();;
+		
+		configuration = ConfigurationUtil.initConfiguration(null);
 	}
 	
 	@PreDestroy
@@ -59,6 +74,9 @@ public class WebApplication implements Serializable {
 		log.info("shutdown ... at " + (new Date()));
 		log.info(StringUtils.repeat("=", 80));
 	}
+	
+
+	
 
 	public Date getStartupDate() {
 		return startupDate;
