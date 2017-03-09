@@ -11,6 +11,7 @@ import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,6 +20,10 @@ public class WebApplication implements Serializable {
 
 	@Inject
 	private Logger log;
+	
+	
+	@Inject
+	private ServletContext context;
 	
 	private Date startupDate = null;
 	
@@ -37,6 +42,9 @@ public class WebApplication implements Serializable {
 		
 		log.info(StringUtils.repeat("=", 80));
 		log.info("startup at " + startupDate);
+		log.info("");
+		log.info(StringUtils.repeat(" ", 60) + "application at: " + context.getContextPath());
+		log.info("");
 		log.info(StringUtils.repeat("=", 80));
 		
 		// init log4j
@@ -46,7 +54,9 @@ public class WebApplication implements Serializable {
 	@PreDestroy
 	public void shutdown() {
 		log.info(StringUtils.repeat("=", 80));
-		log.info("shutdown ...");
+		log.info("startup was at " + startupDate);
+		log.info("");
+		log.info("shutdown ... at " + (new Date()));
 		log.info(StringUtils.repeat("=", 80));
 	}
 

@@ -15,3 +15,12 @@ Basis:
 
 * JUnit
 * Arquillian
+
+
+Running
+-------
+```
+ # mvn install
+# cd ear
+# mvn org.wildfly.plugins:wildfly-maven-plugin:run
+```

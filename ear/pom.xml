@@ -19,50 +19,50 @@ under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>de.csmp.jee-template</groupId>
- 	 <artifactId>ear</artifactId>
-   <packaging>ear</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.csmp.jee-template</groupId>
+	<artifactId>ear</artifactId>
+	<packaging>ear</packaging>
 
-   <name>EAR Project</name>
+	<name>EAR Project</name>
 
-   <parent>
-     <groupId>de.csmp</groupId>
-     <artifactId>jee-template</artifactId>
-     <version>1.0-SNAPSHOT</version>
-   </parent>
+	<parent>
+		<groupId>de.csmp</groupId>
+		<artifactId>jee-template</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 
-   <dependencies>
-     <dependency>
-       <groupId>${project.groupId}</groupId>
-       <artifactId>common</artifactId>
-     </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>common</artifactId>
+		</dependency>
 
-     <dependency>
-       <groupId>${project.groupId}</groupId>
-       <artifactId>web</artifactId>
-       <type>war</type>
-     </dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>web</artifactId>
+			<type>war</type>
+		</dependency>
 
-     <dependency>
-       <groupId>${project.groupId}</groupId>
-       <artifactId>ejbs</artifactId>
-       <type>ejb</type>
-     </dependency>
-   </dependencies>
-   <build>
-      <plugins>
-         <plugin>
-            <artifactId>maven-ear-plugin</artifactId>
-						<version>2.10.1</version>
-            <configuration>
-               <archive>
-                  <manifest>
-                     <addClasspath>true</addClasspath>
-                  </manifest>
-               </archive>
-            </configuration>
-         </plugin>
-      </plugins>
-   </build>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>ejbs</artifactId>
+			<type>ejb</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.10.1</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
