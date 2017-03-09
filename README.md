@@ -20,7 +20,7 @@ Basis:
 Running
 -------
 ```
- # mvn install
+# mvn install
 # cd ear
 # mvn org.wildfly.plugins:wildfly-maven-plugin:run
 ```
