@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.configuration2.CompositeConfiguration;
+
 import de.csmp.jeetemplate.common.configuration.ConfigProperty;
+import de.csmp.jeetemplate.common.logging.Logged;
 import de.csmp.jeetemplate.ejbs.service.TestServiceLocal;
 
 @Named
@@ -32,12 +35,15 @@ public class TestServlet extends HttpServlet implements Serializable {
 	@ConfigProperty(key="test", defaultValue="missing")
 	String test;
 
+	@Inject
+	CompositeConfiguration config;
 
+	@Logged
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		log.info("doGet");
 		ServletOutputStream os = resp.getOutputStream();
-		os.print("test response: " + test + " --- ");
+		os.print("test response: " + test + " --->env: " + config.getString("environment"));
 		testService.doNothing();
 	}
 

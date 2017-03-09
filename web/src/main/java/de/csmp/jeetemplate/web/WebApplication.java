@@ -51,19 +51,16 @@ public class WebApplication implements Serializable {
 		startupDate = new Date();
 		runHash = UUID.randomUUID().toString().substring(0, 8);
 		
+		configuration = ConfigurationUtil.initConfiguration(null);
 		
 		log.info(StringUtils.repeat("=", 80));
 		log.info("startup at " + startupDate);
 		log.info("");
 		log.info(StringUtils.repeat(" ", 40) + "application at: " + context.getContextPath());
 		log.info(StringUtils.repeat(" ", 40) + "runHash:        " + runHash);
+		log.info(StringUtils.repeat(" ", 40) + "environment:    " + configuration.getString("environment"));
 		log.info("");
 		log.info(StringUtils.repeat("=", 80));
-		
-		// init log4j
-		org.apache.logging.log4j.spi.LoggerContext lctx = org.apache.logging.log4j.LogManager.getContext();;
-		
-		configuration = ConfigurationUtil.initConfiguration(null);
 	}
 	
 	@PreDestroy
